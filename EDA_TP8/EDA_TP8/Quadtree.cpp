@@ -1,5 +1,6 @@
 #include "Quadtree.h"
 
+
 void findNextPower(unsigned int& num);
 
 void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold)
@@ -17,7 +18,7 @@ void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigne
 
 }
 
-void decoder(ifstream & input)
+void decoder(std::ifstream & input)
 {
 	//char valueToDecode = input.get();
 	//int depth = 0;
@@ -87,7 +88,7 @@ bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalS
 	return score < threshold;
 }
 
-array<unsigned int, 3> averageColor(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG)
+array<unsigned int, 3> averageColor(std::ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG)
 {
 	array<unsigned int, 3> retValue = { 0,0,0 };
 	unsigned int counter = 0;										// Esto es para evitarlo si es transparente
@@ -107,18 +108,15 @@ array<unsigned int, 3> averageColor(ofstream & output, int x, int y, int lenght,
 	for (int a = 0; a < retValue.size(); a++)				
 		retValue[a] = retValue[a] / counter;					// Esto es para evitarlo si es transparente
 
-
 	return retValue;
 }
 
-void createLeaf(ofstream & output, array<unsigned int, 3> color)
+void createLeaf(std::ofstream & output, array<unsigned int, 3> color)
 {
-
 	output << 'N'<< (unsigned char)color[R] << (unsigned char)color[G] << (unsigned char)color[B];
-
 }
 
-void createNode(ofstream & output)
+void createNode(std::ofstream & output)
 {	
 	output << 'B';
 }
