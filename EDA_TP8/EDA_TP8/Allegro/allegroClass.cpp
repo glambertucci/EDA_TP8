@@ -21,6 +21,7 @@ allegro_c::allegro_c(double H ,double W)
 								{
 									if ((display = al_create_display(W, H)))
 									{
+										al_init_primitives_addon();
 										al_init_acodec_addon();
 										al_init_font_addon();
 										al_init_ttf_addon();
