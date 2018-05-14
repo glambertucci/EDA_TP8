@@ -18,29 +18,29 @@ void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int thr
 
 void decoder(ifstream & input)
 {
-	char valueToDecode = input.get();
-	int depth = 0;
-	int branch = 0;
-	char R, G, B;
-	bool isB;			//False para N, true para B
-	while (!input.eof())
-	{		
-		isB = checkNode(valueToDecode, depth, branch);
-		if (!isB)
-		{
-			// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
-			R = input.get();
-			G = input.get();
-			B = input.get();
-			//ACA IRIA LA FUNCION QUE DIBUJA, RECIBIRIA COMO PAREMENTROS EL RGB, LA PROFUNDIDAD Y LA RAMA
-		}
-		else
-			if ((branch > 0) && (branch < 4))
-			{
-				valueToDecode = input.get();		//Tomo el siguiente caracter codificado
-			}
-		
-	}
+	//char valueToDecode = input.get();
+	//int depth = 0;
+	//int branch = 0;
+	//char R, G, B;
+	//bool isB;			//False para N, true para B
+	//while (!input.eof())
+	//{		
+	//	isB = checkNode(valueToDecode, depth, branch);
+	//	if (!isB)
+	//	{
+	//		// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
+	//		R = input.get();
+	//		G = input.get();
+	//		B = input.get();
+	//		//ACA IRIA LA FUNCION QUE DIBUJA, RECIBIRIA COMO PAREMENTROS EL RGB, LA PROFUNDIDAD Y LA RAMA
+	//	}
+	//	else
+	//		if ((branch > 0) && (branch < 4))
+	//		{
+	//			valueToDecode = input.get();		//Tomo el siguiente caracter codificado
+	//		}
+	//	
+	//}
 }
 
 bool checkNode(char byteAnalize, int & depth, int & branch)

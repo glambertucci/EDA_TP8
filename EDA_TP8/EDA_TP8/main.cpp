@@ -1,8 +1,8 @@
 #include "Allegro\allegroClass.h"
 #include "Allegro\menu.h"
 #include <cstdio>
-#include "parser.h"
-#include "filesystem_header.h"
+#include "Utils/parser.h"
+#include "Directories/filesystem_header.h"
 
 
 vector<string> listall(path p,bool mode_);
@@ -31,6 +31,7 @@ int main(int argc, char ** argv)
 		men.select(Allegrotools.getEventQueue());
 		//Menu tiene un metodo que es getstate bool creo que basicamente lo que esta en 1 son los que hay que comprimir/decomprimir, el iterador
 		//de esos numeros es equivalente al iterador del vector de paths
+		men.workfile();
 
 	}
 	return 0;

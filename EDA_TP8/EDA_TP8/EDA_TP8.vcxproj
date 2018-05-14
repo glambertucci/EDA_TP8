@@ -153,22 +153,21 @@
     <ClInclude Include="Allegro\allegroClass.h" />
     <ClInclude Include="Allegro\menu.h" />
     <ClInclude Include="Allegro\WrittenBox.h" />
-    <ClInclude Include="filesystem_header.h" />
-    <ClInclude Include="lodepng.h" />
+    <ClInclude Include="Directories\filesystem_header.h" />
+    <ClInclude Include="Directories\lodepng.h" />
     <ClInclude Include="mosaic.h" />
-    <ClInclude Include="parser.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="Utils\parser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp" />
     <ClCompile Include="Allegro\menu.cpp" />
     <ClCompile Include="Allegro\WrittenBox.cpp" />
-    <ClCompile Include="filesys_utils.cpp" />
-    <ClCompile Include="lodepng.cpp" />
+    <ClCompile Include="Directories\filesys_utils.cpp" />
+    <ClCompile Include="Directories\lodepng.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mosaic.cpp" />
-    <ClCompile Include="parser.cpp" />
     <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="Utils\parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

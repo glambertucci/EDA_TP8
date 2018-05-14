@@ -13,7 +13,8 @@ public:
 	void print_menu();
 	void update(int iterator);
 	void select(ALLEGRO_EVENT_QUEUE * ev);
-	vector <bool> getstatebool();
+	vector <bool> * getstatebool();
+	void workfile();
 private:
 	bool finished = false;
 	vector <bool> state;

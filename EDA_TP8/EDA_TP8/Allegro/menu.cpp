@@ -12,7 +12,22 @@ menu::menu(vector <string>& paths_, int mode_, string background_)
 
 }
 
-
+void menu::workfile()
+{
+	bool allcero=true;
+	for (int i = 0; i < img_num && allcero; i++)
+	{
+		if (state[i] == false)
+			allcero = true;
+		else allcero = false;
+	}
+	if (!allcero)
+	{
+		//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
+		cout << "Working" << endl;
+	}
+	else cout << "Not working" << endl;
+}
 menu::~menu()
 {
 
@@ -62,6 +77,7 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 	while (!finished)
 	{
 		ALLEGRO_EVENT ev;
+
 		al_get_next_event(ev_queue, &ev);
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
@@ -139,6 +155,11 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 			case ALLEGRO_KEY_ENTER:
 				finished = true;
 			}
+		}
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+		{
+			update('N');
+			finished = true;
 		}
 	}
 }

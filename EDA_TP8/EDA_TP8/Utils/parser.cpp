@@ -1,6 +1,6 @@
 #include "parser.h"
-#include "filesystem_header.h"
-#include "Allegro\menu.h"
+#include "../Directories/filesystem_header.h"
+#include "../Allegro\menu.h"
 void strToCapital(char * str);
 int parseCmdLine(int argc, char *argv[], pCallback p, void * userData) {
 	int final = 0, result = 0, posible = 0, error = false;
