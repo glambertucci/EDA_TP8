@@ -147,10 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Allegro\allegroClass.h" />
+    <ClInclude Include="Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
