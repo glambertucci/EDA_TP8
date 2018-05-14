@@ -7,8 +7,8 @@
 #include <allegro5/allegro_audio.h>
 
 #define FPS (50.0)
-#define SCREEN_W 1000 
-#define SCREEN_H 600
+#define SCREEN_W 1920 
+#define SCREEN_H 696
 class allegro_c
 {
 public:
