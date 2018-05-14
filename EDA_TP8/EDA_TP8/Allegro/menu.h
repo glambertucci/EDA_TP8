@@ -10,7 +10,7 @@ using namespace std;
 class menu
 {
 public:
-	menu(vector <string>& paths_,int mode_,string background_);
+	menu(vector <string>& paths_,int mode_,string background_,int th);
 	~menu();
 	void print_menu();
 	void update(int iterator);
@@ -26,6 +26,7 @@ private:
 	bool first=true;
 	int img_num;
 	int firstpic=0;
+	int threshold;
 	ALLEGRO_BITMAP * background;
 };
 

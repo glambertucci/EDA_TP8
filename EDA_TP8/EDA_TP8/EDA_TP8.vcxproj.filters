@@ -22,14 +22,14 @@
     <Filter Include="Header Files\Directories">
       <UniqueIdentifier>{a3d4f7de-abeb-41c8-bee5-602b9fe7bbd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Directories">
-      <UniqueIdentifier>{59201395-2dd4-4e0d-815a-37992bf27cfd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{7ab72058-6378-4358-a1f3-86cbb413f286}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{e8fc41dd-2c2e-4b36-b68f-533bdf9e1ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Directories">
+      <UniqueIdentifier>{59201395-2dd4-4e0d-815a-37992bf27cfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

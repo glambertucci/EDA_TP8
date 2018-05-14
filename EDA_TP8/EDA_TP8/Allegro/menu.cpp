@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "WrittenBox.h"
 #include "allegroClass.h"
-menu::menu(vector <string>& paths_, int mode_, string background_)
+menu::menu(vector <string>& paths_, int mode_, string background_,int th)
 {
 	paths = paths_;
 	mode = mode_;
@@ -9,6 +9,7 @@ menu::menu(vector <string>& paths_, int mode_, string background_)
 	img_num = this->paths.size();
 	for (int i = 0; i < img_num; i++)
 		state.push_back(0);
+	this->threshold = th;
 
 }
 
@@ -23,14 +24,18 @@ void menu::workfile()
 	}
 	if (!allcero)
 	{
-		if () {
+		if (this->mode == COMPRESS) {
 			ofstream out("Nombre de la foto.gay", ofstream::binary); // No donde esta el bool si me dice comprimir o descomprimir
 			unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
 			unsigned int w = 0, h = 0;								 // No se donde esta el threshold tampoco.
 			lodepng_decode32_file(&raw, &w, &h, "nomreb de la foto");
-			encoder(out, 0, 0, w, w, raw, threshold);
+			encoder(out, 0, 0, w, w, raw, this->threshold);
 			out.close();
 			free(raw);
+		}
+		else //descomprimir
+		{
+
 		}
 		//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
 		cout << "Working" << endl;
