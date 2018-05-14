@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Allegro">
       <UniqueIdentifier>{6d5f153c-9e1f-40d1-9278-ca25c2e10f8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Directories">
+      <UniqueIdentifier>{a3d4f7de-abeb-41c8-bee5-602b9fe7bbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Directories">
+      <UniqueIdentifier>{59201395-2dd4-4e0d-815a-37992bf27cfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allegro\allegroClass.h">
@@ -35,6 +41,15 @@
     </ClInclude>
     <ClInclude Include="Allegro\WrittenBox.h">
       <Filter>Header Files\Allegro</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem_header.h">
+      <Filter>Header Files\Directories</Filter>
+    </ClInclude>
+    <ClInclude Include="lodepng.h">
+      <Filter>Header Files\Directories</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,12 +71,27 @@
     <ClCompile Include="Allegro\WrittenBox.cpp">
       <Filter>Source Files\Allegro</Filter>
     </ClCompile>
+    <ClCompile Include="filesys_utils.cpp">
+      <Filter>Source Files\Directories</Filter>
+    </ClCompile>
+    <ClCompile Include="lodepng.cpp">
+      <Filter>Source Files\Directories</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\background.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\tutorial.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\tumblr_static_shadow.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
