@@ -35,7 +35,7 @@ void decoder(ifstream & input)
 			//ACA IRIA LA FUNCION QUE DIBUJA, RECIBIRIA COMO PAREMENTROS EL RGB, LA PROFUNDIDAD Y LA RAMA
 		}
 		else
-			while ((branch > 0) && (branch < 4))
+			if ((branch > 0) && (branch < 4))
 			{
 				valueToDecode = input.get();		//Tomo el siguiente caracter codificado
 			}
