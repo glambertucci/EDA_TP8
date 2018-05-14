@@ -1,5 +1,7 @@
 #include "Quadtree.h"
 
+void findNextPower(unsigned int& num);
+
 void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold)
 {
 	if ((lenght == 1) || (thresholdColor(rawPNG, x, y, lenght, totalSize, threshold))) {
@@ -119,4 +121,65 @@ void createLeaf(ofstream & output, array<unsigned int, 3> color)
 void createNode(ofstream & output)
 {	
 	output << 'B';
+}
+
+
+void checkAndResizePicture(unsigned char ** rawPNG_, unsigned int & w, unsigned int & h)
+{
+	unsigned int oldW = w, oldH = h;
+
+	if (((log2((double)w) - (unsigned int)log2((double)w)) || (log2((double)h) - (unsigned int)log2((double)h) != 0)) || w != h) {
+
+		findNextPower(w);
+		findNextPower(h);
+
+		if (w > h)
+			h = w;
+		else if (w < h)
+			w = h;
+
+		unsigned char * rawPNG = *rawPNG_;
+		unsigned char * newRaw = (unsigned char *)malloc(sizeof(unsigned char) * 4 * w * h);
+		int fixedPixel = 4 * (oldH - 1) *oldW + 4 * (oldW - 1);
+
+		for (int i = 0; i < oldH; i++) {
+			for (int a = 0; a < oldW; a++) {
+				int pixel = 4 * i * w + a * 4;
+				int oldPixel = 4 * i * oldW + a * 4;
+
+				newRaw[pixel + R] = rawPNG[oldPixel + R];
+				newRaw[pixel + G] = rawPNG[oldPixel + G];
+				newRaw[pixel + B] = rawPNG[oldPixel + B];
+				newRaw[pixel + A] = rawPNG[oldPixel + A];
+			}
+		}
+		for (int i = 0; i < h; i++) {
+			for (int a = oldW; a < w; a++) {
+				int pixel = 4 * i * w + a * 4;
+				newRaw[pixel + R] = rawPNG[fixedPixel + R];
+				newRaw[pixel + G] = rawPNG[fixedPixel + G];
+				newRaw[pixel + B] = rawPNG[fixedPixel + B];
+				newRaw[pixel + A] = 0;
+			}
+		}
+
+		for (int i = oldH; i < h; i++) {
+			for (int a = 0; a < w; a++) {
+				int pixel = 4 * i * w + a * 4;
+				newRaw[pixel + R] = rawPNG[fixedPixel + R];
+				newRaw[pixel + G] = rawPNG[fixedPixel + G];
+				newRaw[pixel + B] = rawPNG[fixedPixel + B];
+				newRaw[pixel + A] = 0;
+			}
+		}
+		free(rawPNG);
+		*rawPNG_ = newRaw;
+	}
+}
+
+void findNextPower(unsigned int& num) {
+
+	double log = log2(num);
+	if (log - (unsigned int)log)					// Si es 0, entonces el numero ya es una potencia de dos.
+		num = pow(2, (unsigned int)(log + 1));
 }

@@ -24,3 +24,7 @@ array<unsigned int,3> averageColor(ofstream & output, int x, int y, int lenght, 
 void createLeaf(ofstream & output, array<unsigned int, 3> color);
 
 void createNode(ofstream & output);
+
+// Esta funcion cambia el tama;o de la imagen a uno apto para el quadtree. Si la imagen ya cumple con los requisitos, no la cambia.
+// Tambien modifica las variables de alto y ancho.
+void checkAndResizePicture(unsigned char ** rawPNG, unsigned int& w, unsigned int& h);
