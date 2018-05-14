@@ -15,6 +15,31 @@ void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int thr
 
 }
 
+void decoder(ifstream & input)
+{
+	char valueToDecode = input.get();
+	char R, G, B;
+	int levelCounter = 0;
+	
+	while (!input.eof())
+	{		
+		while (valueToDecode == 'B')
+		{			//Miro si se creó un nodo
+			levelCounter++;
+			valueToDecode = input.get();
+			if (valueToDecode == 'N') 
+			{		// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
+				R = input.get();
+				G = input.get();
+				B = input.get();
+			}
+
+		}
+		
+	}
+}
+
+
 bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold)
 {
 	bool retValue;
