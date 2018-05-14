@@ -3,16 +3,14 @@
 void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int threshold)
 {
 	if ((lenght == 1) || (thresholdColor(rawPNG, x, y, lenght, threshold))) {
-		averageColor(output, x, y, lenght, rawPNG);
+		createLeaf(output,averageColor(output, x, y, lenght, rawPNG));
 		return;
-	}
-	createNode();
+	} else
+		createNode(output);
+
 	encoder(output, x, y, lenght / 2, rawPNG, threshold);
-	createNode();
 	encoder(output, x + lenght / 2, y, lenght / 2, rawPNG, threshold);
-	createNode();
 	encoder(output, x, y + lenght / 2, lenght / 2, rawPNG, threshold);
-	createNode();
 	encoder(output, x + lenght / 2, y + lenght / 2, lenght / 2, rawPNG, threshold);
 
 }
@@ -25,20 +23,20 @@ bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold)
 
 	for (int i = 0; i < lenght; i++) {
 		for (int j = 0; j < lenght; j++) {
-			if (maxRed < rawPNG[(x + i * lenght) + (y + j)][0])		// Almacena los maximos y minimos del color rojo
-				maxRed = rawPNG[(x + i * lenght) + (y + j)][0];
-			else if (minRed >rawPNG[(x + i * lenght) + (y + j)][0])	//DUDA: seria un else if o un if?
-				minRed = rawPNG[(x + i * lenght) + (y + j)][0];
+			if (maxRed < rawPNG[(y + i * lenght) + (x + j)][0])		// Almacena los maximos y minimos del color rojo
+				maxRed = rawPNG[(y + i * lenght) + (x + j)][0];
+			if (minRed >rawPNG[(y + i * lenght) + (x + j)][0])	//DUDA: seria un else if o un if?
+				minRed = rawPNG[(y + i * lenght) + (x + j)][0];
 
-			if (maxGreen < rawPNG[(x + i * lenght) + (y + j)][1])	// Almacena los maximos y minimos del color verde
-				maxGreen = rawPNG[(x + i * lenght) + (y + j)][1];
-			else if (minGreen >rawPNG[(x + i * lenght) + (y + j)][1])
-				minGreen = rawPNG[(x + i * lenght) + (y + j)][1];
+			if (maxGreen < rawPNG[(y + i * lenght) + (x + j)][1])	// Almacena los maximos y minimos del color verde
+				maxGreen = rawPNG[(y + i * lenght) + (x + j)][1];
+			if (minGreen >rawPNG[(y + i * lenght) + (x + j)][1])
+				minGreen = rawPNG[(y+ i * lenght) + (x + j)][1];
 
-			if (maxBlue < rawPNG[(x + i * lenght) + (y + j)][2])	// Almacena los maximos y minimos del color azul
-				maxBlue = rawPNG[(x + i * lenght) + (y + j)][2];
-			else if (minBlue >rawPNG[(x + i * lenght) + (y + j)][2])
-				minBlue = rawPNG[(x + i * lenght) + (y + j)][2];
+			if (maxBlue < rawPNG[(y + i * lenght) + (x + j)][2])	// Almacena los maximos y minimos del color azul
+				maxBlue = rawPNG[(y + i * lenght) + (x + j)][2];
+			if (minBlue >rawPNG[(y + i * lenght) + (x + j)][2])
+				minBlue = rawPNG[(y + i * lenght) + (x + j)][2];
 		}
 	}
 
@@ -67,4 +65,9 @@ void createLeaf(ostream & output, array<unsigned char, 3> color)
 {
 	output << 'N'<< color[R] << color[G] << color[B];
 
+}
+
+void createNode(ostream & output)
+{
+	output << 'B';
 }
