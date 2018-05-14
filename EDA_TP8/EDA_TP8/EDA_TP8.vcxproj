@@ -92,6 +92,7 @@
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
     <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Allegro_AddonImage>true</Allegro_AddonImage>
@@ -100,6 +101,7 @@
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
     <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,15 +149,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Allegro\allegroClass.h" />
+    <ClInclude Include="Allegro\menu.h" />
+    <ClInclude Include="Allegro\WrittenBox.h" />
+    <ClInclude Include="mosaic.h" />
     <ClInclude Include="Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp" />
+    <ClCompile Include="Allegro\menu.cpp" />
+    <ClCompile Include="Allegro\WrittenBox.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mosaic.cpp" />
     <ClCompile Include="Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\background.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

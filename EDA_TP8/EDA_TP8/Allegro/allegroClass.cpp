@@ -21,6 +21,9 @@ allegro_c::allegro_c(double H ,double W)
 								{
 									if ((display = al_create_display(W, H)))
 									{
+										al_init_acodec_addon();
+										al_init_font_addon();
+										al_init_ttf_addon();
 										al_register_event_source(this->ev_queue, al_get_keyboard_event_source());
 										al_register_event_source(this->ev_queue, al_get_display_event_source(this->display));
 										al_register_event_source(this->ev_queue, al_get_timer_event_source(this->timer));

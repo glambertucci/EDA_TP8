@@ -27,6 +27,15 @@
     <ClInclude Include="Quadtree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Allegro\menu.h">
+      <Filter>Header Files\Allegro</Filter>
+    </ClInclude>
+    <ClInclude Include="mosaic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Allegro\WrittenBox.h">
+      <Filter>Header Files\Allegro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp">
@@ -38,8 +47,22 @@
     <ClCompile Include="Quadtree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Allegro\menu.cpp">
+      <Filter>Source Files\Allegro</Filter>
+    </ClCompile>
+    <ClCompile Include="mosaic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Allegro\WrittenBox.cpp">
+      <Filter>Source Files\Allegro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\background.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
