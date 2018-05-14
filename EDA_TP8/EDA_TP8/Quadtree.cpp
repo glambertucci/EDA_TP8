@@ -25,7 +25,7 @@ bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold)
 		for (int j = 0; j < lenght; j++) {
 			if (maxRed < rawPNG[(y + i * lenght) + (x + j)][0])		// Almacena los maximos y minimos del color rojo
 				maxRed = rawPNG[(y + i * lenght) + (x + j)][0];
-			if (minRed >rawPNG[(y + i * lenght) + (x + j)][0])		//DUDA: seria un else if o un if?
+			if (minRed >rawPNG[(y + i * lenght) + (x + j)][0])	//DUDA: seria un else if o un if?
 				minRed = rawPNG[(y + i * lenght) + (x + j)][0];
 
 			if (maxGreen < rawPNG[(y + i * lenght) + (x + j)][1])	// Almacena los maximos y minimos del color verde
