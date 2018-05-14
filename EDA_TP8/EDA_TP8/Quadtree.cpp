@@ -1,5 +1,6 @@
 #include "Quadtree.h"
 
+
 void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int threshold)
 {
 	if ((lenght == 1) || (thresholdColor(rawPNG, x, y, lenght, threshold))) {
@@ -18,27 +19,46 @@ void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int thr
 void decoder(ifstream & input)
 {
 	char valueToDecode = input.get();
+	int depth = 0;
+	int branch = 0;
 	char R, G, B;
-	int levelCounter = 0;
-	
+	bool isB;			//False para N, true para B
 	while (!input.eof())
 	{		
-		while (valueToDecode == 'B')
-		{			//Miro si se creó un nodo
-			levelCounter++;
-			valueToDecode = input.get();
-			if (valueToDecode == 'N') 
-			{		// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
-				R = input.get();
-				G = input.get();
-				B = input.get();
-			}
-
+		isB = checkNode(valueToDecode, depth, branch);
+		if (!isB)
+		{
+			// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
+			R = input.get();
+			G = input.get();
+			B = input.get();
+			//ACA IRIA LA FUNCION QUE DIBUJA, RECIBIRIA COMO PAREMENTROS EL RGB, LA PROFUNDIDAD Y LA RAMA
 		}
+		else
+			if ((branch > 0) && (branch < 4))
+			{
+				valueToDecode = input.get();		//Tomo el siguiente caracter codificado
+			}
 		
 	}
 }
 
+bool checkNode(char byteAnalize, int & depth, int & branch)
+{
+	if (byteAnalize == 'B')
+	{			//Miro si se creó un nodo
+		depth++;
+		branch++;
+		return true;
+	}
+	if (byteAnalize == 'N')
+	{	
+		if (branch == 4)
+			depth--;
+		branch--;
+		return false;
+	}
+}
 
 bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold)
 {

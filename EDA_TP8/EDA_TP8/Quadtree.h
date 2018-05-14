@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <array>
+
 enum{R,G,B};
 
 using namespace std;
