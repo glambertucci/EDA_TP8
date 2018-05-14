@@ -2,7 +2,7 @@
 #include <fstream>
 #include <array>
 
-enum{R,G,B};
+enum{R,G,B,A};
 
 using namespace std;
 

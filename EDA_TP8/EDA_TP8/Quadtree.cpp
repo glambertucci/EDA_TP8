@@ -68,13 +68,15 @@ bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalS
 			int pixelInicial = (4 * x + (y*totalSize *4));
 			int pixelActual = pixelInicial + (4* i * totalSize) + ( 4*j);
 
-			for (int a = 0; a < max.size(); a++)
-				if (max[a] < rawPNG[pixelActual + a])
-					max[a] = rawPNG[pixelActual + a];
+			if (rawPNG[pixelActual + A] != 0) {				// Esto es para evitarlo si es transparente. NO SE SI TIENE QUE IR ACA
+				for (int a = 0; a < max.size(); a++)
+					if (max[a] < rawPNG[pixelActual + a])
+						max[a] = rawPNG[pixelActual + a];
 
-			for (int a = 0; a < min.size(); a++)
-				if (min[a] > rawPNG[pixelActual + a])
-					min[a] = rawPNG[pixelActual + a];
+				for (int a = 0; a < min.size(); a++)
+					if (min[a] > rawPNG[pixelActual + a])
+						min[a] = rawPNG[pixelActual + a];
+			}
 		}
 	}
 
@@ -86,17 +88,22 @@ bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalS
 array<unsigned int, 3> averageColor(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG)
 {
 	array<unsigned int, 3> retValue = { 0,0,0 };
+	unsigned int counter = 0;										// Esto es para evitarlo si es transparente
 	
 	for (int i = 0; i < lenght; i++)
-		for (int j = 0; j < lenght; j++)
-			for (int a = 0; a < retValue.size(); a++) {
-				int pixelInicial = (4 * x + (y * totalSize * 4));
-				int pixelActual = pixelInicial + (4 * i * totalSize) + (4 * j);
-				retValue[a] += rawPNG[pixelActual + a];
-			}
+		for (int j = 0; j < lenght; j++) {
+			int pixelInicial = (4 * x + (y * totalSize * 4));
+			int pixelActual = pixelInicial + (4 * i * totalSize) + (4 * j);
 
-	for (int a = 0; a < retValue.size(); a++)
-		retValue[a] = retValue[a] / (lenght * lenght);
+			if (rawPNG[pixelActual + A] != 0) {						// Esto es para evitarlo si es transparente
+				counter++;
+				for (int a = 0; a < retValue.size(); a++)
+					retValue[a] += rawPNG[pixelActual + a];
+			}
+		}
+
+	for (int a = 0; a < retValue.size(); a++)				
+		retValue[a] = retValue[a] / counter;					// Esto es para evitarlo si es transparente
 
 
 	return retValue;
