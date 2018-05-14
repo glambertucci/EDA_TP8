@@ -29,6 +29,8 @@ void menu::workfile()
 			unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
 			unsigned int w = 0, h = 0;								 
 			lodepng_decode32_file(&raw, &w, &h, "nombre de la foto");
+			checkAndResizePicture(&raw, w, h);
+			out << w << h;			// En algun lado le tengo que meter el tama;o. Aunque con mandar un lado deberia ser suficiente.
 			encoder(out, 0, 0, w, w, raw, this->threshold);
 			out.close();
 			free(raw);
