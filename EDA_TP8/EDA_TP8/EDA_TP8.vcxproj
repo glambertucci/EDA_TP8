@@ -147,11 +147,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Allegro\allegroClass.h" />
+    <ClInclude Include="Allegro\WrittenBox.h" />
+    <ClInclude Include="Mosaic.h" />
     <ClInclude Include="Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp" />
+    <ClCompile Include="Allegro\WrittenBox.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mosaic.cpp" />
     <ClCompile Include="Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
