@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "WrittenBox.h"
 #include "allegroClass.h"
-menu::menu(vector <string>& paths_, int mode_, string background_,int th)
+menu::menu(vector <string>& paths_, int mode_, string background_, int th)
 {
 	paths = paths_;
 	mode = mode_;
@@ -15,7 +15,7 @@ menu::menu(vector <string>& paths_, int mode_, string background_,int th)
 
 void menu::workfile()
 {
-	bool allcero=true;
+	bool allcero = true;
 	for (int i = 0; i < img_num && allcero; i++)
 	{
 		if (state[i] == false)
@@ -24,21 +24,29 @@ void menu::workfile()
 	}
 	if (!allcero)
 	{
-		if (this->mode == COMPRESS) {
-			ofstream out("Nombre de la foto.gay", ofstream::binary); 
-			unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
-			unsigned int w = 0, h = 0;								 
-			lodepng_decode32_file(&raw, &w, &h, "nombre de la foto");
-			encoder(out, 0, 0, w, w, raw, this->threshold);
-			out.close();
-			free(raw);
-		}
-		else //descomprimir
+		for (int i = 0; i < img_num; i++)
 		{
-			
+			if (this->state[i] == true) {
+				if (this->mode == COMPRESS) {
+					string aux = paths[i];
+					int a = (aux.size());
+					aux.erase(a - 3, a);
+					ofstream out(aux + "gay", ofstream::binary);
+					unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
+					unsigned int w = 0, h = 0;
+					lodepng_decode32_file(&raw, &w, &h, this->paths[i].c_str());
+					encoder(out, 0, 0, w, w, raw, this->threshold);
+					out.close();
+					free(raw);
+				}
+				else //descomprimir
+				{
+
+				}
+			}
+			//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
+			cout << "Working" << endl;
 		}
-		//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
-		cout << "Working" << endl;
 	}
 	else cout << "Not working" << endl;
 }
@@ -50,11 +58,11 @@ void menu::print_menu()
 {
 
 	if (mode == COMPRESS) {
-		if(first){
-		for (int i = 0; (i < img_num); i++)
-			this->bitmaps.push_back(al_load_bitmap(paths[i].c_str()));
-		first = false;
-		al_draw_bitmap(background, 0, 0, 0);
+		if (first) {
+			for (int i = 0; (i < img_num); i++)
+				this->bitmaps.push_back(al_load_bitmap(paths[i].c_str()));
+			first = false;
+			al_draw_bitmap(background, 0, 0, 0);
 		}
 		bool done = false;
 
@@ -63,7 +71,7 @@ void menu::print_menu()
 			int offset = firstpic / 9;
 			if (firstpic + i >= img_num)
 				done = true;
-			else 
+			else
 				al_draw_scaled_bitmap(this->bitmaps[i + offset * 9], 0, 0, al_get_bitmap_width(this->bitmaps[i + offset * 9]), al_get_bitmap_height(this->bitmaps[i + offset * 9]), 50 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (500) : (300)) : (100)), 150, 100, NULL);
 		}
 	}
@@ -99,8 +107,8 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 			{
 			case ALLEGRO_KEY_1:
 			case ALLEGRO_KEY_PAD_1:
-				if(img_num> 0 + firstpic)
-				update(0);
+				if (img_num > 0 + firstpic)
+					update(0);
 				break;
 			case ALLEGRO_KEY_2:
 			case ALLEGRO_KEY_PAD_2:
@@ -109,37 +117,37 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 				break;
 			case ALLEGRO_KEY_3:
 			case ALLEGRO_KEY_PAD_3:
-				if (img_num > 2+firstpic)
+				if (img_num > 2 + firstpic)
 					update(2);
 				break;
 			case ALLEGRO_KEY_4:
 			case ALLEGRO_KEY_PAD_4:
-				if (img_num >3 + firstpic)
+				if (img_num > 3 + firstpic)
 					update(3);
 				break;
 			case ALLEGRO_KEY_5:
 			case ALLEGRO_KEY_PAD_5:
-				if (img_num >4 + firstpic)
+				if (img_num > 4 + firstpic)
 					update(4);
 				break;
 			case ALLEGRO_KEY_6:
 			case ALLEGRO_KEY_PAD_6:
-				if (img_num >=5 + firstpic)
+				if (img_num >= 5 + firstpic)
 					update(5);
 				break;
 			case ALLEGRO_KEY_7:
 			case ALLEGRO_KEY_PAD_7:
-				if (img_num >6 + firstpic)
+				if (img_num > 6 + firstpic)
 					update(6);
 				break;
 			case ALLEGRO_KEY_8:
 			case ALLEGRO_KEY_PAD_8:
-				if (img_num >7 + firstpic)
+				if (img_num > 7 + firstpic)
 					update(7);
 				break;
 			case ALLEGRO_KEY_9:
 			case ALLEGRO_KEY_PAD_9:
-				if (img_num >8 + firstpic)
+				if (img_num > 8 + firstpic)
 					update(8);
 				break;
 			case ALLEGRO_KEY_A:
@@ -184,19 +192,19 @@ vector <bool> * menu::getstatebool() {
 void menu::update(int iterator)
 {
 	int change = firstpic + iterator;
-	if(iterator!=-1){
-	if (iterator <= img_num)
-		this->state[change] = state[change] == false ? true : false;
-	else if (iterator == 'A')
-		for (int i = 0; i < img_num; i++)
-			state[i] = true;
-	else
-		for (int i = 0; i < img_num; i++)
-			state[i] = false;
+	if (iterator != -1) {
+		if (iterator <= img_num)
+			this->state[change] = state[change] == false ? true : false;
+		else if (iterator == 'A')
+			for (int i = 0; i < img_num; i++)
+				state[i] = true;
+		else
+			for (int i = 0; i < img_num; i++)
+				state[i] = false;
 	}
-	for (int i = 0; i+firstpic< img_num && i<9; i++)
+	for (int i = 0; i + firstpic < img_num && i < 9; i++)
 	{
-		if (state[i+firstpic] == true)
+		if (state[i + firstpic] == true)
 		{
 			al_draw_filled_rectangle(45 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (495) : (295)) : (95)), 205 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (605) : (405)) : (205)), al_map_rgb(0, 255, 0));
 		}

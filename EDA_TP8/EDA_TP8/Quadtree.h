@@ -27,7 +27,7 @@ array<unsigned int,3> averageColor(std::ofstream & output, int x, int y, int len
 void createLeaf(std::ofstream & output, array<unsigned int, 3> color);
 
 
-void createNode(ofstream & output);
+void createNode(std::ofstream & output);
 
 // Esta funcion cambia el tama;o de la imagen a uno apto para el quadtree. Si la imagen ya cumple con los requisitos, no la cambia.
 // Tambien modifica las variables de alto y ancho.
