@@ -27,6 +27,9 @@
     <ClInclude Include="Quadtree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Allegro\menu.h">
+      <Filter>Header Files\Allegro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Allegro\allegroClass.cpp">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Quadtree.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Allegro\menu.cpp">
+      <Filter>Source Files\Allegro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
