@@ -2,16 +2,25 @@
 #include <fstream>
 #include <array>
 
-enum{R,G,B};
+enum{R,G,B,A};
 
 using namespace std;
 
-void encoder(ostream& output, int x, int y, int lenght, char ** rawPNG, int threshold );
+// Comprime a la imagen
+//
+// - output: es el stream al archivo donde se va a escribir (Debe estar en modo binario)
+// - x, y: son las coordenadas donde se evaluara y comprimira
+// - lenght: es el lado del cuadrado a evaluar
+// - totalSize: es el tama;o total de la imagen. ESTE VALOR NO DEBE CAMBIAR.
+// - rawPNG: Es la imagen en formato raw
+// - threshold: determina la compresion final del archivo.
 
-bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold);
+void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold );
 
-array<unsigned char,3> averageColor(ostream& output, int x, int y, int lenght, char ** rawPNG);
+bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalSize, int threshold);
 
-void createLeaf(ostream& output, array<unsigned char, 3> color);
+array<unsigned int,3> averageColor(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG);
 
-void createNode(ostream& output);
+void createLeaf(ofstream & output, array<unsigned int, 3> color);
+
+void createNode(ofstream & output);

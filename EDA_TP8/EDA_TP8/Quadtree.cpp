@@ -1,18 +1,17 @@
 #include "Quadtree.h"
 
-
-void encoder(ostream & output, int x, int y, int lenght, char ** rawPNG, int threshold)
+void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold)
 {
-	if ((lenght == 1) || (thresholdColor(rawPNG, x, y, lenght, threshold))) {
-		createLeaf(output,averageColor(output, x, y, lenght, rawPNG));
+	if ((lenght == 1) || (thresholdColor(rawPNG, x, y, lenght, totalSize, threshold))) {
+		createLeaf(output,averageColor(output, x, y, lenght, totalSize, rawPNG));
 		return;
 	} else
 		createNode(output);
 
-	encoder(output, x, y, lenght / 2, rawPNG, threshold);
-	encoder(output, x + lenght / 2, y, lenght / 2, rawPNG, threshold);
-	encoder(output, x, y + lenght / 2, lenght / 2, rawPNG, threshold);
-	encoder(output, x + lenght / 2, y + lenght / 2, lenght / 2, rawPNG, threshold);
+	encoder(output, x, y, lenght / 2, totalSize, rawPNG, threshold);
+	encoder(output, x + lenght / 2, y, lenght / 2, totalSize, rawPNG, threshold);
+	encoder(output, x, y + lenght / 2, lenght / 2, totalSize, rawPNG, threshold);
+	encoder(output, x + lenght / 2, y + lenght / 2, lenght / 2, totalSize, rawPNG, threshold);
 
 }
 
@@ -60,59 +59,64 @@ bool checkNode(char byteAnalize, int & depth, int & branch)
 	}
 }
 
-bool thresholdColor(char ** rawPNG, int x, int y, int lenght, int threshold)
+bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalSize, int threshold)
 {
-	bool retValue;
-	unsigned char maxRed = 0, maxBlue = 0, maxGreen = 0;
-	unsigned char minRed = 255, minBlue = 255, minGreen = 255;
+	array<unsigned char, 3> max = { 0,0,0 }, min = { 255,255,255 };
 
 	for (int i = 0; i < lenght; i++) {
 		for (int j = 0; j < lenght; j++) {
-			if (maxRed < rawPNG[(y + i * lenght) + (x + j)][0])		// Almacena los maximos y minimos del color rojo
-				maxRed = rawPNG[(y + i * lenght) + (x + j)][0];
-			if (minRed >rawPNG[(y + i * lenght) + (x + j)][0])	//DUDA: seria un else if o un if?
-				minRed = rawPNG[(y + i * lenght) + (x + j)][0];
+			int pixelInicial = (4 * x + (y*totalSize *4));
+			int pixelActual = pixelInicial + (4* i * totalSize) + ( 4*j);
 
-			if (maxGreen < rawPNG[(y + i * lenght) + (x + j)][1])	// Almacena los maximos y minimos del color verde
-				maxGreen = rawPNG[(y + i * lenght) + (x + j)][1];
-			if (minGreen >rawPNG[(y + i * lenght) + (x + j)][1])
-				minGreen = rawPNG[(y+ i * lenght) + (x + j)][1];
+			if (rawPNG[pixelActual + A] != 0) {				// Esto es para evitarlo si es transparente. NO SE SI TIENE QUE IR ACA
+				for (int a = 0; a < max.size(); a++)
+					if (max[a] < rawPNG[pixelActual + a])
+						max[a] = rawPNG[pixelActual + a];
 
-			if (maxBlue < rawPNG[(y + i * lenght) + (x + j)][2])	// Almacena los maximos y minimos del color azul
-				maxBlue = rawPNG[(y + i * lenght) + (x + j)][2];
-			if (minBlue >rawPNG[(y + i * lenght) + (x + j)][2])
-				minBlue = rawPNG[(y + i * lenght) + (x + j)][2];
+				for (int a = 0; a < min.size(); a++)
+					if (min[a] > rawPNG[pixelActual + a])
+						min[a] = rawPNG[pixelActual + a];
+			}
 		}
 	}
 
-	int score = (maxRed - minRed) + (maxGreen - minGreen) + (maxBlue - minBlue);
+	int score = (max[R] - min[R]) + (max[G] - min[G]) + (max[B] - min[B]);
 	
 	return score < threshold;
 }
 
-array<unsigned char, 3> averageColor(ostream & output, int x, int y, int lenght, char ** rawPNG)
+array<unsigned int, 3> averageColor(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG)
 {
-	array<unsigned char, 3> retValue = { 0,0,0 };
+	array<unsigned int, 3> retValue = { 0,0,0 };
+	unsigned int counter = 0;										// Esto es para evitarlo si es transparente
 	
-	for (int i = 0; i < lenght; i++) 
-		for (int j = 0; j < lenght; j++) 
-			for (int a = 0; a < retValue.size(); a++) 
-				retValue[a] = +rawPNG[(x + i * lenght) + (y + j)][a];
+	for (int i = 0; i < lenght; i++)
+		for (int j = 0; j < lenght; j++) {
+			int pixelInicial = (4 * x + (y * totalSize * 4));
+			int pixelActual = pixelInicial + (4 * i * totalSize) + (4 * j);
 
-	for (int a = 0; a < retValue.size(); a++)
-		retValue[a] = retValue[a] / (lenght * lenght);
+			if (rawPNG[pixelActual + A] != 0) {						// Esto es para evitarlo si es transparente
+				counter++;
+				for (int a = 0; a < retValue.size(); a++)
+					retValue[a] += rawPNG[pixelActual + a];
+			}
+		}
+
+	for (int a = 0; a < retValue.size(); a++)				
+		retValue[a] = retValue[a] / counter;					// Esto es para evitarlo si es transparente
 
 
 	return retValue;
 }
 
-void createLeaf(ostream & output, array<unsigned char, 3> color)
+void createLeaf(ofstream & output, array<unsigned int, 3> color)
 {
-	output << 'N'<< color[R] << color[G] << color[B];
+
+	output << 'N'<< (unsigned char)color[R] << (unsigned char)color[G] << (unsigned char)color[B];
 
 }
 
-void createNode(ostream & output)
-{
+void createNode(ofstream & output)
+{	
 	output << 'B';
 }
