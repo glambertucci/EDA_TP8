@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "allegroClass.h"
+#include "../Quadtree.h"
+#include "../Directories/lodepng.h"
 #include <iostream>
 using namespace std;
 #define COMPRESS 1

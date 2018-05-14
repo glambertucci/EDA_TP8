@@ -23,6 +23,15 @@ void menu::workfile()
 	}
 	if (!allcero)
 	{
+		if () {
+			ofstream out("Nombre de la foto.gay", ofstream::binary); // No donde esta el bool si me dice comprimir o descomprimir
+			unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
+			unsigned int w = 0, h = 0;								 // No se donde esta el threshold tampoco.
+			lodepng_decode32_file(&raw, &w, &h, "nomreb de la foto");
+			encoder(out, 0, 0, w, w, raw, threshold);
+			out.close();
+			free(raw);
+		}
 		//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
 		cout << "Working" << endl;
 	}
