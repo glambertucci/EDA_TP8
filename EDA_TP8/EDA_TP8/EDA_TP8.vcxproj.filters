@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Directories">
       <UniqueIdentifier>{59201395-2dd4-4e0d-815a-37992bf27cfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{9ca089be-1ca5-4bf3-9590-e64304bac621}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allegro\allegroClass.h">
@@ -95,7 +98,43 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\tumblr_static_shadow.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\7cdb05fc5117e30750a7c555bcda1c02d8fa35f7.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\114.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\82781dfa00ddf215260555adfe01d6be.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\A_Gun.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\a66511b982545e397a6805d82e6ebdf7.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\c28eb900f8e9f29748dc48baa1c2dc5e.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\Choco_chip_cookie.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\eda7.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\Nyan-Cat-PNG-Image.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\PNG_transparency_demonstration_1.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\PNGPIX-COM-Silver-Audi-Car-PNG-Image.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\Small-mario.png">
+      <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
 </Project>

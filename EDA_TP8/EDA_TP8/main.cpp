@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 			else {
 				cout << ">> Input error: el directorio no es valido." << endl;
 			}
-		menu men(path_of_pngs, data.mode, "Images/background.jpg",data.threshold);
+		menu men(path_of_pngs, data.mode, "Utils/background.jpg",data.threshold);
 		men.print_menu();
 		men.select(Allegrotools.getEventQueue());
 		//Menu tiene un metodo que es getstate bool creo que basicamente lo que esta en 1 son los que hay que comprimir/decomprimir, el iterador

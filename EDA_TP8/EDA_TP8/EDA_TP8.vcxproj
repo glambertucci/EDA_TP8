@@ -173,7 +173,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Images\114.png" />
+    <Image Include="Images\7cdb05fc5117e30750a7c555bcda1c02d8fa35f7.png" />
+    <Image Include="Images\82781dfa00ddf215260555adfe01d6be.png" />
+    <Image Include="Images\a66511b982545e397a6805d82e6ebdf7.png" />
+    <Image Include="Images\A_Gun.png" />
     <Image Include="Images\background.jpg" />
+    <Image Include="Images\c28eb900f8e9f29748dc48baa1c2dc5e.png" />
+    <Image Include="Images\Choco_chip_cookie.png" />
+    <Image Include="Images\eda7.png" />
+    <Image Include="Images\Nyan-Cat-PNG-Image.png" />
+    <Image Include="Images\PNGPIX-COM-Silver-Audi-Car-PNG-Image.png" />
+    <Image Include="Images\PNG_transparency_demonstration_1.png" />
+    <Image Include="Images\Small-mario.png" />
     <Image Include="Images\tumblr_static_shadow.png" />
     <Image Include="Images\tutorial.png" />
   </ItemGroup>

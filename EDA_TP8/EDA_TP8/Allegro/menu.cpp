@@ -25,17 +25,17 @@ void menu::workfile()
 	if (!allcero)
 	{
 		if (this->mode == COMPRESS) {
-			ofstream out("Nombre de la foto.gay", ofstream::binary); // No donde esta el bool si me dice comprimir o descomprimir
+			ofstream out("Nombre de la foto.gay", ofstream::binary); 
 			unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
-			unsigned int w = 0, h = 0;								 // No se donde esta el threshold tampoco.
-			lodepng_decode32_file(&raw, &w, &h, "nomreb de la foto");
+			unsigned int w = 0, h = 0;								 
+			lodepng_decode32_file(&raw, &w, &h, "nombre de la foto");
 			encoder(out, 0, 0, w, w, raw, this->threshold);
 			out.close();
 			free(raw);
 		}
 		else //descomprimir
 		{
-
+			
 		}
 		//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
 		cout << "Working" << endl;
@@ -81,7 +81,7 @@ void menu::print_menu()
 			box.draw();
 		}
 	}
-	ALLEGRO_BITMAP * tutorial = al_load_bitmap("Images/tutorial.png");
+	ALLEGRO_BITMAP * tutorial = al_load_bitmap("Utils/tutorial.png");
 	al_draw_scaled_bitmap(tutorial, 0, 0, al_get_bitmap_width(tutorial), al_get_bitmap_height(tutorial), 500, 50, 700, 600, NULL);
 
 	al_flip_display();
