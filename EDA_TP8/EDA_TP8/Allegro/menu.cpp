@@ -32,9 +32,10 @@ void menu::workfile()
 					int a = (aux.size());
 					aux.erase(a - 3, a);
 					ofstream out(aux + "gay", ofstream::binary);
-					unsigned char * raw = NULL;								 // Faltaria agregar la validacion de que los lados sean iguales y 2^n
+					unsigned char * raw = NULL;								 
 					unsigned int w = 0, h = 0;
 					lodepng_decode32_file(&raw, &w, &h, this->paths[i].c_str());
+					checkAndResizePicture(&raw, w, h);
 					encoder(out, 0, 0, w, w, raw, this->threshold);
 					out.close();
 					free(raw);

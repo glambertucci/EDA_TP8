@@ -106,7 +106,7 @@ array<unsigned int, 3> averageColor(std::ofstream & output, int x, int y, int le
 		}
 
 	for (int a = 0; a < retValue.size(); a++)				
-		retValue[a] = retValue[a] / counter;					// Esto es para evitarlo si es transparente
+		retValue[a] = retValue[a] / (counter ? counter : 1);					// Esto es para evitarlo si es transparente
 
 	return retValue;
 }
