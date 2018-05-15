@@ -30,7 +30,7 @@ allegro_c::allegro_c(double H ,double W)
 										al_register_event_source(this->ev_queue, al_get_timer_event_source(this->timer));
 										al_set_window_title(display, "Pym particles accelerator");//antman reference
 										al_start_timer(this->timer);
-										ALLEGRO_BITMAP * icon = al_load_bitmap("Utils/icon.png");
+										ALLEGRO_BITMAP * icon = al_load_bitmap(ICONPATH);
 										al_set_display_icon(display, icon);
 									}
 								}
@@ -71,7 +71,6 @@ bool allegro_c::load_music(const char * music_file) //Devuelve 1 si todo salio b
 	else
 		result = false;
 	return result;
-
 }
 
 void allegro_c::updateDisplay()

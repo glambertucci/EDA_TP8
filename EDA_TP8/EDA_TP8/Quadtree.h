@@ -23,6 +23,6 @@ void createLeaf(ofstream & output, array<unsigned int, 3> color);
 
 void createNode(ofstream & output);
 
+
 void decoder(ifstream & input, unsigned char * rawPNG, unsigned int x, unsigned int y, unsigned int totalSize, unsigned int lenght);
 
-unsigned int x, unsigned int y, unsigned int lenght, unsigned char * rawPNG, array<unsigned char,3> color, unsigned int totalSize);

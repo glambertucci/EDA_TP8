@@ -45,9 +45,6 @@
     <ClInclude Include="Allegro\menu.h">
       <Filter>Header Files\Allegro</Filter>
     </ClInclude>
-    <ClInclude Include="mosaic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Allegro\WrittenBox.h">
       <Filter>Header Files\Allegro</Filter>
     </ClInclude>

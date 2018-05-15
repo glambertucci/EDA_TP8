@@ -5,54 +5,47 @@
 #include "Directories/filesystem_header.h"
 
 
-vector<string> listall(path p,bool mode_);
-
 
 int main(int argc, char ** argv)
 {
-	allegro_c Allegrotools(SCREEN_H, SCREEN_W);
-	Allegrotools.load_music("Music/Antman.wav");
-	Allegrotools.play_music();
 	userInfo data;
-
 	if (!parseCmdLine(argc, argv, &callback, (void*)&data)) {
 		vector<string> path_of_pngs;
-			if (check_existance(data.userpath.c_str())) { // poner en lugar de EXAMPLE el argv[1]
-				cout << ">> Empezando a buscar archivos" << endl;
-				path_of_pngs = listall(data.userpath.c_str(),data.mode); // tenemos los pngs en del directorio que nos pasaron!
-				if (path_of_pngs.size() == 0) {return -1;}
-				cout << ">> Archivos encontrados." << endl;
+		if (check_existance(data.userpath.c_str())) { //me fijo que exista el apth
+			cout << ">> Empezando a buscar archivos" << endl;
+			path_of_pngs = listall(data.userpath.c_str(), data.mode); // tenemos los pngs en del directorio que nos pasaron!
+			if (path_of_pngs.size() == 0) {//Si existe el path  pero no hay ninguna imagen con esa extension
+				cout << ">>No hay ninguna imagen con dicha extensión, toque enter para salir" << endl;
+				getchar();
+				return 0;
 			}
-			else {
-				cout << ">> Input error: el directorio no es valido." << endl;
-			}
-		menu men(path_of_pngs, data.mode, "Utils/background.jpg",data.threshold);
+			cout << ">> Archivos encontrados." << endl;
+		}
+		else {
+			cout << ">> Input error: el directorio no es valido." << endl;
+			cout << ">>Toque enter para salir" << endl;
+			getchar();
+			return 0;
+		}
+		allegro_c Allegrotools(SCREEN_H, SCREEN_W);
+		Allegrotools.load_music(MUSICPATH);
+		Allegrotools.play_music();
+		menu men(path_of_pngs, data.mode, BACKGROUNDPATH, data.threshold);
 		men.print_menu();
+		men.update(-1);
 		men.select(Allegrotools.getEventQueue());
-		//Menu tiene un metodo que es getstate bool creo que basicamente lo que esta en 1 son los que hay que comprimir/decomprimir, el iterador
-		//de esos numeros es equivalente al iterador del vector de paths
 		men.workfile();
-
+	}
+	else
+	{
+		cout << ">>Ha ocurrido un error de parseo, por favor ingrese por linea de comando parámetros con las siguientes especificaciones" << endl;
+		cout << "Ingrese" << endl << "-Threshold [value] con el value 0<val<100" << endl;
+		cout << "-method [compresion/decompresion]" << endl;
+		cout << "-p [path donde guarda las imágenes]" << endl;
+		cout << "Nosotros suministramos una carpeta con alguna imágenes de prueba llamada images." << endl;
+		cout << "Aprete enter para salir" << endl;
+		getchar();
 	}
 	return 0;
 }
 
-vector<string> listall(path p,bool mode_) {
-	directory_iterator end_itr;
-	vector<string> found;
-	// cycle through the directory
-	for (directory_iterator itr(p); itr != end_itr; ++itr){
-		// If it's not a directory, list it. If you want to list directories too, just remove this check.
-		if (is_regular_file(itr->path())) {
-			// assign current file name to current_file and echo it out to the console.
-			string current_file = itr->path().string();
-			if (current_file.size() >= 5) { // al menos es un a.png
-				if (!strcmp(&current_file[current_file.size() - 4], mode_==COMPRESS? ".png" : ".gay")) {//DEBUG
-					found.push_back(current_file);
-					path aux(current_file);
-				}
-			}
-		}
-	}
-	return found;
-}
