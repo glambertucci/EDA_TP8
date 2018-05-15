@@ -33,6 +33,11 @@ void menu::workfile()
 					namefile.erase(0, justname + 1);
 					cout << "Compressing file " << namefile << endl;
 					string aux = paths[i];
+					aux.erase(justname, paths[i].size());
+					justname = paths[i].find_last_of("\\");
+					aux.erase(justname, paths[i].size());
+					aux += "\\Compressed\\";
+					aux += namefile;
 					int a = (aux.size());
 					aux.erase(a - 4, a);
 					std::ofstream out(aux + COMPEXTENSION, std::ofstream::binary);
