@@ -36,7 +36,7 @@ void createNode(std::ofstream & output);
 void checkAndResizePicture(unsigned char ** rawPNG, unsigned int& w, unsigned int& h);
 
 
-void getOriginQuad(unsigned int& corrX, unsigned int& corrY, int depth, unsigned int width);
+void getOriginQuad(unsigned int& corrX, unsigned int& corrY, int depth, int branch, unsigned int width);
 
 void reconstructImg(array<unsigned char, 3> & color, int depth, int branch, unsigned int measure, vector<unsigned char>& pngImage, unsigned char alpha);
 

@@ -30,8 +30,8 @@ void menu::workfile()
 				if (this->mode == COMPRESS) {
 					string aux = paths[i];
 					int a = (aux.size());
-					aux.erase(a - 3, a);
-					ofstream out(aux + "gay", ofstream::binary);
+					aux.erase(a - 4, a);
+					ofstream out(aux + EXTENSION, ofstream::binary);
 					unsigned char * raw = NULL;								 
 					unsigned int w = 0, h = 0;
 					lodepng_decode32_file(&raw, &w, &h, this->paths[i].c_str());
@@ -86,7 +86,10 @@ void menu::print_menu()
 		}
 		for (int i = 0; (i < img_num) && (i < 9); i++)
 		{
-			WrittenBox box((50.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (500.0) : (300.0)) : (100.0)), 150.0, 100.0, 8, paths[i].c_str(), "Triforce.ttf", "mediumorchid");
+			int justname = paths[i].find_last_of("\\");
+			string aux = paths[i];
+			aux.erase(0, justname +1);
+			WrittenBox box((50.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (500.0) : (300.0)) : (100.0)), 150.0, 100.0, 10, aux.c_str(), "Utils/Triforce.ttf", "black");
 			box.draw();
 		}
 	}

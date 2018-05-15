@@ -28,6 +28,7 @@ int main(int argc, char ** argv)
 			}
 		menu men(path_of_pngs, data.mode, "Utils/background.jpg",data.threshold);
 		men.print_menu();
+		men.update(-1);
 		men.select(Allegrotools.getEventQueue());
 		//Menu tiene un metodo que es getstate bool creo que basicamente lo que esta en 1 son los que hay que comprimir/decomprimir, el iterador
 		//de esos numeros es equivalente al iterador del vector de paths
@@ -47,7 +48,7 @@ vector<string> listall(path p,bool mode_) {
 			// assign current file name to current_file and echo it out to the console.
 			string current_file = itr->path().string();
 			if (current_file.size() >= 5) { // al menos es un a.png
-				if (!strcmp(&current_file[current_file.size() - 4], mode_==COMPRESS? ".png" : ".gay")) {//DEBUG
+				if (!strcmp(&current_file[current_file.size() - 4], mode_==COMPRESS? ".png" : EXTENSION)) {
 					found.push_back(current_file);
 					path aux(current_file);
 				}

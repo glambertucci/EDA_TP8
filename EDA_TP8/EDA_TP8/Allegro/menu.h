@@ -7,6 +7,7 @@
 using namespace std;
 #define COMPRESS 1
 #define DECOMPRESS 0
+#define EXTENSION ".flg"
 class menu
 {
 public:
