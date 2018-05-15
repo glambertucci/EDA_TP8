@@ -20,48 +20,44 @@ void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigne
 
 void decoder(std::ifstream & input)
 {
-	//char valueToDecode = input.get();
-	//int depth = 0;
-	//int branch = 0;
-	//char R, G, B;
-	//bool isB;			//False para N, true para B
-	//while (!input.eof())
-	//{		
-	//	isB = checkNode(valueToDecode, depth, branch);
-	//	if (!isB)
-	//	{
-	//		// Como encuentro un NoBranch seguro los siguientes 3 bytes son el RGB
-	//		R = input.get();
-	//		G = input.get();
-	//		B = input.get();
-	//		//ACA IRIA LA FUNCION QUE DIBUJA, RECIBIRIA COMO PAREMENTROS EL RGB, LA PROFUNDIDAD Y LA RAMA
-	//	}
-	//	else
-	//		if ((branch > 0) && (branch < 4))
-	//		{
-	//			valueToDecode = input.get();		//Tomo el siguiente caracter codificado
-	//		}
-	//	
-	//}
-}
+	char valueToDecode = input.get();
+	unsigned int depth = 0;
+	unsigned int branch = 0;
+	array<unsigned char, 3> color = { 0,0,0 };
+	bool isB;			//False para N, true para B
+	while (!input.eof())
+	{
+		do {
+			if (valueToDecode == 'B') {
+				depth++;
+			}
+		} while (valueToDecode != 'N');
+		if (depth == 0) {			//Imagen monocromatica
+			color[R] = input.get();
+			color[G] = input.get();
+			color[B] = input.get();
+			//DIBUJO ESO
+		}
+		else if (depth > 0) {					//Imagen subdividida en cuadrantes
+			branch++;							//Me posiciono en una rama
+			if (branch <= 4) {					//Como se que luego de una N vienen los 3 bytes de color
+				color[R] = input.get();
+				color[G] = input.get();
+				color[B] = input.get();
+				//DIBUJO		
+			}
+			else if (branch > 4) {				//Mientras no me pase de esta condicion, mantengo mi nivel en el arbol para iterar 
+				branch = 1;						//Una vez que se cumpla esta condicion reinicio en 1 la rama, volviendo al nodo padre
+				depth--;						//al que se llega decrementando la profundidad del arbol
+			}
+		}
 
-bool checkNode(char byteAnalize, int & depth, int & branch)
+	}
+}
+void reconstructImg(array<unsigned char, 3> & color, int depth, int branch)
 {
-	if (byteAnalize == 'B')
-	{			//Miro si se creó un nodo
-		depth++;
-		branch++;
-		return true;
-	}
-	if (byteAnalize == 'N')
-	{	
-		if (branch == 4)
-			depth--;
-		branch--;
-		return false;
-	}
-}
 
+}
 bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalSize, int threshold)
 {
 	array<unsigned char, 3> max = { 0,0,0 }, min = { 255,255,255 };
