@@ -36,7 +36,7 @@ void menu::workfile()
 					aux.erase(justname, paths[i].size());
 					justname = paths[i].find_last_of("\\");
 					aux.erase(justname, paths[i].size());
-					aux += "\\Compressed\\";
+					aux += "\\Compress\\";
 					aux += namefile;
 					int a = (aux.size());
 					aux.erase(a - 4, a);
@@ -65,8 +65,7 @@ void menu::workfile()
 					string aux = paths[i];
 					int a = (aux.size());
 					aux.erase(a - 4, a);
-
-					std::ifstream in(aux + COMPEXTENSION, std::ofstream::binary);
+					std::ifstream in(aux + DECOMPEXTENSION, std::ofstream::binary);
 
 					unsigned int w, h, lenght;
 					
