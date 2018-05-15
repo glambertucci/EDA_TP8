@@ -1,6 +1,10 @@
 #pragma once
 
 #include <array>
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <ostream>
 
 enum{R,G,B,A};
 
@@ -14,9 +18,7 @@ using namespace std;
 // - totalSize: es el tama;o total de la imagen. ESTE VALOR NO DEBE CAMBIAR.
 // - rawPNG: Es la imagen en formato raw
 // - threshold: determina la compresion final del archivo.
-#include <fstream>
-#include <iostream>
-#include <ostream>
+
 
 void encoder(std::ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold );
 
@@ -34,3 +36,8 @@ void createNode(std::ofstream & output);
 void checkAndResizePicture(unsigned char ** rawPNG, unsigned int& w, unsigned int& h);
 
 
+void getOriginQuad(unsigned int& corrX, unsigned int& corrY, int depth, unsigned int width);
+
+void reconstructImg(array<unsigned char, 3> & color, int depth, int branch, unsigned int measure, vector<unsigned char>& pngImage, unsigned char alpha);
+
+void decoder(std::ifstream & input);

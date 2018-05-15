@@ -21,8 +21,8 @@ void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigne
 void decoder(std::ifstream & input)
 {
 	char valueToDecode = input.get();
-	unsigned int depth = 0;
-	unsigned int branch = 0;
+	unsigned int depth = 0, branch = 0, iterator = 0;
+	
 	array<unsigned char, 3> color = { 0,0,0 };
 	bool isB;			//False para N, true para B
 	while (!input.eof())
@@ -51,13 +51,35 @@ void decoder(std::ifstream & input)
 				depth--;						//al que se llega decrementando la profundidad del arbol
 			}
 		}
-
 	}
 }
-void reconstructImg(array<unsigned char, 3> & color, int depth, int branch)
+
+void reconstructImg(array<unsigned char, 3> & color, int depth, int branch, unsigned int measure, vector<unsigned char>& pngImage, unsigned char alpha)
+{
+	unsigned int orgX = 0, orgY = 0;
+	unsigned int quadrantMeasure = measure / pow(2,depth);
+	getOriginQuad(orgX, orgY, depth, branch, measure);		// CON ESTA FUNCIÖN TENGO PROBLEMAS, buscar el "cero" para el cuadrado 
+
+	unsigned int  maxX, maxY;
+	maxX = orgX + (quadrantMeasure) * 4; 
+	maxY = orgY + (quadrantMeasure);
+
+	for (unsigned int i = orgX; i < maxX; i += 4){
+		for (unsigned int j = orgY; j < maxY; j++){
+			pngImage[i + j * (measure * 4)] = color[R];
+			pngImage[i + j * (measure * 4) + 1] = color[G];
+			pngImage[i + j * (measure * 4) + 2] = color[B];
+			pngImage[i + j * (measure * 4) + 3] = alpha;
+		}
+	}
+}
+
+void getOriginQuad(unsigned int& corrX, unsigned int& corrY, int depth, int branch, unsigned int width)
 {
 
 }
+
+
 bool thresholdColor(unsigned char * rawPNG, int x, int y, int lenght, int totalSize, int threshold)
 {
 	array<unsigned char, 3> max = { 0,0,0 }, min = { 255,255,255 };
