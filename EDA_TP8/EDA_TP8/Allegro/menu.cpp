@@ -65,7 +65,7 @@ void menu::workfile()
 					string aux = paths[i];
 					int a = (aux.size());
 					aux.erase(a - 4, a);
-					std::ifstream in(aux + DECOMPEXTENSION, std::ofstream::binary);
+					std::ifstream in(aux + COMPEXTENSION, std::ofstream::binary);
 
 					unsigned int w, h, lenght;
 					
