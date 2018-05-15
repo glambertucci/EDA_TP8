@@ -155,6 +155,7 @@
     <ClInclude Include="Allegro\WrittenBox.h" />
     <ClInclude Include="Directories\filesystem_header.h" />
     <ClInclude Include="Directories\lodepng.h" />
+    <ClInclude Include="ImageHandler.h" />
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Utils\parser.h" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="Allegro\WrittenBox.cpp" />
     <ClCompile Include="Directories\filesys_utils.cpp" />
     <ClCompile Include="Directories\lodepng.cpp" />
+    <ClCompile Include="ImageHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Utils\parser.cpp" />
