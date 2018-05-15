@@ -155,7 +155,6 @@
     <ClInclude Include="Allegro\WrittenBox.h" />
     <ClInclude Include="Directories\filesystem_header.h" />
     <ClInclude Include="Directories\lodepng.h" />
-    <ClInclude Include="mosaic.h" />
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Utils\parser.h" />
   </ItemGroup>

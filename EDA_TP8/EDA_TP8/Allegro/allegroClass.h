@@ -8,6 +8,12 @@
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h>
 
+#define ICONPATH "Utils/icon.png"
+#define BACKGROUNDPATH "Utils/background.jpg"
+#define MUSICPATH "Music/Antman.wav"
+#define TUTOPATH "Utils/tutorial.png"
+#define FONTPATH "Utils/Triforce.ttf"
+
 #define FPS (50.0)
 #define SCREEN_W 1000 
 #define SCREEN_H 600

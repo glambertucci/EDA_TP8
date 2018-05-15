@@ -28,11 +28,15 @@ void menu::workfile()
 		{
 			if (this->state[i] == true) {
 				if (this->mode == COMPRESS) {
+					int justname = paths[i].find_last_of("\\");
+					string namefile = paths[i];
+					namefile.erase(0, justname + 1);
+					cout << "Compressing file " << namefile << endl;
 					string aux = paths[i];
 					int a = (aux.size());
 					aux.erase(a - 4, a);
-					ofstream out(aux + EXTENSION, ofstream::binary);
-					unsigned char * raw = NULL;								 
+					std::ofstream out(aux + COMPEXTENSION, std::ofstream::binary);
+					unsigned char * raw = NULL;
 					unsigned int w = 0, h = 0;
 					lodepng_decode32_file(&raw, &w, &h, this->paths[i].c_str());
 					checkAndResizePicture(&raw, w, h);
@@ -46,10 +50,10 @@ void menu::workfile()
 				}
 			}
 			//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
-			cout << "Working" << endl;
+
 		}
 	}
-	else cout << "Not working" << endl;
+	else cout << "Nothing to work" << endl;
 }
 menu::~menu()
 {
@@ -88,12 +92,12 @@ void menu::print_menu()
 		{
 			int justname = paths[i].find_last_of("\\");
 			string aux = paths[i];
-			aux.erase(0, justname +1);
-			WrittenBox box((50.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (500.0) : (300.0)) : (100.0)), 150.0, 100.0, 10, aux.c_str(), "Utils/Triforce.ttf", "black");
+			aux.erase(0, justname + 1);
+			WrittenBox box((50.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (500.0) : (300.0)) : (100.0)), 150.0, 100.0, 10, aux.c_str(), FONTPATH, "black");
 			box.draw();
 		}
 	}
-	ALLEGRO_BITMAP * tutorial = al_load_bitmap("Utils/tutorial.png");
+	ALLEGRO_BITMAP * tutorial = al_load_bitmap(TUTOPATH);
 	al_draw_scaled_bitmap(tutorial, 0, 0, al_get_bitmap_width(tutorial), al_get_bitmap_height(tutorial), 500, 50, 700, 600, NULL);
 
 	al_flip_display();
@@ -103,57 +107,35 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 	while (!finished)
 	{
 		ALLEGRO_EVENT ev;
-
+		int num = 0;
 		al_get_next_event(ev_queue, &ev);
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			switch (ev.keyboard.keycode)
 			{
-			case ALLEGRO_KEY_1:
-			case ALLEGRO_KEY_PAD_1:
-				if (img_num > 0 + firstpic)
-					update(0);
-				break;
-			case ALLEGRO_KEY_2:
-			case ALLEGRO_KEY_PAD_2:
-				if (img_num > 1 + firstpic)
-					update(1);
-				break;
-			case ALLEGRO_KEY_3:
-			case ALLEGRO_KEY_PAD_3:
-				if (img_num > 2 + firstpic)
-					update(2);
-				break;
-			case ALLEGRO_KEY_4:
-			case ALLEGRO_KEY_PAD_4:
-				if (img_num > 3 + firstpic)
-					update(3);
-				break;
-			case ALLEGRO_KEY_5:
-			case ALLEGRO_KEY_PAD_5:
-				if (img_num > 4 + firstpic)
-					update(4);
-				break;
-			case ALLEGRO_KEY_6:
-			case ALLEGRO_KEY_PAD_6:
-				if (img_num >= 5 + firstpic)
-					update(5);
-				break;
-			case ALLEGRO_KEY_7:
-			case ALLEGRO_KEY_PAD_7:
-				if (img_num > 6 + firstpic)
-					update(6);
-				break;
-			case ALLEGRO_KEY_8:
-			case ALLEGRO_KEY_PAD_8:
-				if (img_num > 7 + firstpic)
-					update(7);
-				break;
-			case ALLEGRO_KEY_9:
-			case ALLEGRO_KEY_PAD_9:
-				if (img_num > 8 + firstpic)
-					update(8);
-				break;
+			//case ALLEGRO_KEY_1:
+			//case ALLEGRO_KEY_PAD_1:
+			//case ALLEGRO_KEY_2:
+			//case ALLEGRO_KEY_PAD_2:
+			//case ALLEGRO_KEY_3:
+			//case ALLEGRO_KEY_PAD_3:
+			//case ALLEGRO_KEY_4:
+			//case ALLEGRO_KEY_PAD_4:
+			//case ALLEGRO_KEY_5:
+			//case ALLEGRO_KEY_PAD_5:
+			//case ALLEGRO_KEY_6:
+			//case ALLEGRO_KEY_PAD_6:
+			//case ALLEGRO_KEY_7:
+			//case ALLEGRO_KEY_PAD_7:
+			//case ALLEGRO_KEY_8:
+			//case ALLEGRO_KEY_PAD_8:
+			//case ALLEGRO_KEY_9:
+			//case ALLEGRO_KEY_PAD_9:
+			//	num = (((ev.keyboard.keycode > ALLEGRO_KEY_0 && ev.keyboard.keycode < ALLEGRO_KEY_9) ? (ev.keyboard.keycode - ALLEGRO_KEY_0) : (ev.keyboard.keycode - ALLEGRO_KEY_PAD_0)) + firstpic);
+			//	if (img_num >= num)
+			//		update(num-1);
+			//	break;
+
 			case ALLEGRO_KEY_A:
 				update('A');
 				break;
@@ -180,6 +162,18 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 				break;
 			case ALLEGRO_KEY_ENTER:
 				finished = true;
+				break;
+			case ALLEGRO_KEY_ESCAPE:
+				update('N');
+				finished = true;
+				break;
+			default:
+				if ((ev.keyboard.keycode > ALLEGRO_KEY_0 && ev.keyboard.keycode <= ALLEGRO_KEY_9) || (ev.keyboard.keycode > ALLEGRO_KEY_PAD_0 && ev.keyboard.keycode <= ALLEGRO_KEY_PAD_9))
+				{
+						num = (((ev.keyboard.keycode > ALLEGRO_KEY_0 && ev.keyboard.keycode <= ALLEGRO_KEY_9) ? (ev.keyboard.keycode - ALLEGRO_KEY_0) : (ev.keyboard.keycode - ALLEGRO_KEY_PAD_0)) + firstpic);
+						if (img_num >= num)
+							update(num-1);
+				}
 			}
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -195,10 +189,9 @@ vector <bool> * menu::getstatebool() {
 }
 void menu::update(int iterator)
 {
-	int change = firstpic + iterator;
 	if (iterator != -1) {
 		if (iterator <= img_num)
-			this->state[change] = state[change] == false ? true : false;
+			this->state[iterator] = state[iterator] == false ? true : false;
 		else if (iterator == 'A')
 			for (int i = 0; i < img_num; i++)
 				state[i] = true;

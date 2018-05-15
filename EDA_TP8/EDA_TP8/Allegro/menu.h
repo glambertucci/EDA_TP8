@@ -4,10 +4,10 @@
 #include "../Quadtree.h"
 #include "../Directories/lodepng.h"
 #include <iostream>
+#include "../Directories/filesystem_header.h"
 using namespace std;
-#define COMPRESS 1
-#define DECOMPRESS 0
-#define EXTENSION ".flg"
+enum{DECOMPRESS,COMPRESS};
+
 class menu
 {
 public:
