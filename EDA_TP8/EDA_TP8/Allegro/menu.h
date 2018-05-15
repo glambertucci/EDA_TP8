@@ -2,6 +2,7 @@
 #include <vector>
 #include "allegroClass.h"
 #include "../Quadtree.h"
+#include "../ImageHandler.h"
 #include "../Directories/lodepng.h"
 #include <iostream>
 #include "../Directories/filesystem_header.h"

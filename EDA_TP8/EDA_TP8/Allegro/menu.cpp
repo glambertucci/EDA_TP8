@@ -36,17 +36,46 @@ void menu::workfile()
 					int a = (aux.size());
 					aux.erase(a - 4, a);
 					std::ofstream out(aux + COMPEXTENSION, std::ofstream::binary);
+
 					unsigned char * raw = NULL;
 					unsigned int w = 0, h = 0;
+
 					lodepng_decode32_file(&raw, &w, &h, this->paths[i].c_str());
+
+					setSize(out, w, h);
+
 					checkAndResizePicture(&raw, w, h);
+
 					encoder(out, 0, 0, w, w, raw, this->threshold);
+
 					out.close();
 					free(raw);
 				}
 				else //descomprimir
 				{
+					int justname = paths[i].find_last_of("\\");
+					string namefile = paths[i];
+					namefile.erase(0, justname + 1);
+					cout << "uncompressing file " << namefile << endl;
+					string aux = paths[i];
+					int a = (aux.size());
+					aux.erase(a - 4, a);
 
+					std::ifstream in(aux + COMPEXTENSION, std::ofstream::binary);
+
+					unsigned int w, h, lenght;
+					
+
+					getSize(in, w, h, lenght);
+
+					unsigned char * raw = (unsigned char *)malloc(4 * lenght * lenght);
+					decoder(in, raw, 0, 0, lenght, lenght);
+
+					unsquarePicture(&raw, w, h);
+
+					lodepng_encode32_file((aux + DECOMPEXTENSION).c_str(), raw, w, h);
+					free(raw);
+					in.close();
 				}
 			}
 			//Aca va lo de comprimir o decomprimir, el iterador deonde sea true es el iterador de path a comrpmir / decomprimir
