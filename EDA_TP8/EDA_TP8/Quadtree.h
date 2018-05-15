@@ -16,13 +16,13 @@ using namespace std;
 // - rawPNG: Es la imagen en formato raw
 // - threshold: determina la compresion final del archivo.
 
-void encoder(ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold);
+void encoder(std::ofstream & output, int x, int y, int lenght, int totalSize, unsigned char * rawPNG, int threshold);
 
 
-void createLeaf(ofstream & output, array<unsigned int, 3> color);
+void createLeaf(std::ofstream & output, array<unsigned int, 3> color);
 
-void createNode(ofstream & output);
+void createNode(std::ofstream & output);
 
 
-void decoder(ifstream & input, unsigned char * rawPNG, unsigned int x, unsigned int y, unsigned int totalSize, unsigned int lenght);
+void decoder(std::ifstream & input, unsigned char * rawPNG, unsigned int x, unsigned int y, unsigned int totalSize, unsigned int lenght);
 
