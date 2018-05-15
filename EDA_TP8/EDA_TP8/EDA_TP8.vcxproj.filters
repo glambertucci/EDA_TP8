@@ -133,5 +133,11 @@
     <Image Include="Images\Small-mario.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
+    <Image Include="Utils\5255.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Utils\tuto.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

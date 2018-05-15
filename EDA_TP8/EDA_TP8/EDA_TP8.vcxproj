@@ -187,6 +187,8 @@
     <Image Include="Images\Small-mario.png" />
     <Image Include="Images\tumblr_static_shadow.png" />
     <Image Include="Images\tutorial.png" />
+    <Image Include="Utils\5255.jpg" />
+    <Image Include="Utils\tuto.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

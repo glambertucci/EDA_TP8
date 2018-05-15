@@ -73,11 +73,11 @@ void menu::print_menu()
 
 		for (int i = 0; i < img_num && i < 9 && !done; i++)
 		{
-			int offset = firstpic / 9;
+
 			if (firstpic + i >= img_num)
 				done = true;
 			else
-				al_draw_scaled_bitmap(this->bitmaps[i + offset * 9], 0, 0, al_get_bitmap_width(this->bitmaps[i + offset * 9]), al_get_bitmap_height(this->bitmaps[i + offset * 9]), 50 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (500) : (300)) : (100)), 150, 100, NULL);
+				al_draw_scaled_bitmap(this->bitmaps[i + firstpic], 0, 0, al_get_bitmap_width(this->bitmaps[i + firstpic]), al_get_bitmap_height(this->bitmaps[i + firstpic]), 30 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (450) : (250)) : (50)), 150, 100, NULL);
 		}
 	}
 	else
@@ -93,12 +93,12 @@ void menu::print_menu()
 			int justname = paths[i].find_last_of("\\");
 			string aux = paths[i];
 			aux.erase(0, justname + 1);
-			WrittenBox box((50.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (500.0) : (300.0)) : (100.0)), 150.0, 100.0, 10, aux.c_str(), FONTPATH, "black");
+			WrittenBox box((30.0 + (i >= 3 ? (i >= 6 ? ((i - 06) * 200) : ((i - 3) * 200)) : (i * 200))), (i >= 3 ? (i >= 6 ? (450.0) : (250.0)) : (50.0)), 150.0, 100.0, 10, aux.c_str(), FONTPATH, "black");
 			box.draw();
 		}
 	}
 	ALLEGRO_BITMAP * tutorial = al_load_bitmap(TUTOPATH);
-	al_draw_scaled_bitmap(tutorial, 0, 0, al_get_bitmap_width(tutorial), al_get_bitmap_height(tutorial), 500, 50, 700, 600, NULL);
+	al_draw_scaled_bitmap(tutorial, 0, 0, al_get_bitmap_width(tutorial), al_get_bitmap_height(tutorial), 610, 0, 400, 600, NULL);
 
 	al_flip_display();
 }
@@ -113,29 +113,6 @@ void menu::select(ALLEGRO_EVENT_QUEUE * ev_queue)
 		{
 			switch (ev.keyboard.keycode)
 			{
-			//case ALLEGRO_KEY_1:
-			//case ALLEGRO_KEY_PAD_1:
-			//case ALLEGRO_KEY_2:
-			//case ALLEGRO_KEY_PAD_2:
-			//case ALLEGRO_KEY_3:
-			//case ALLEGRO_KEY_PAD_3:
-			//case ALLEGRO_KEY_4:
-			//case ALLEGRO_KEY_PAD_4:
-			//case ALLEGRO_KEY_5:
-			//case ALLEGRO_KEY_PAD_5:
-			//case ALLEGRO_KEY_6:
-			//case ALLEGRO_KEY_PAD_6:
-			//case ALLEGRO_KEY_7:
-			//case ALLEGRO_KEY_PAD_7:
-			//case ALLEGRO_KEY_8:
-			//case ALLEGRO_KEY_PAD_8:
-			//case ALLEGRO_KEY_9:
-			//case ALLEGRO_KEY_PAD_9:
-			//	num = (((ev.keyboard.keycode > ALLEGRO_KEY_0 && ev.keyboard.keycode < ALLEGRO_KEY_9) ? (ev.keyboard.keycode - ALLEGRO_KEY_0) : (ev.keyboard.keycode - ALLEGRO_KEY_PAD_0)) + firstpic);
-			//	if (img_num >= num)
-			//		update(num-1);
-			//	break;
-
 			case ALLEGRO_KEY_A:
 				update('A');
 				break;
@@ -203,10 +180,10 @@ void menu::update(int iterator)
 	{
 		if (state[i + firstpic] == true)
 		{
-			al_draw_filled_rectangle(45 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (495) : (295)) : (95)), 205 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (605) : (405)) : (205)), al_map_rgb(0, 255, 0));
+			al_draw_filled_rectangle(25 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (445) : (245)) : (45)), 185 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (555) : (355)) : (155)), al_map_rgb(0, 255, 0));
 		}
 		else {
-			al_draw_filled_rectangle(45 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (495) : (295)) : (95)), 205 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (605) : (405)) : (205)), al_map_rgb(0, 0, 0));
+			al_draw_filled_rectangle(25 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (445) : (245)) : (45)), 185 + (i >= 3 ? (i >= 6 ? ((i - 6) * 200) : ((i - 3) * 200)) : (i * 200)), (i >= 3 ? (i >= 6 ? (555) : (355)) : (155)), al_map_rgb(0, 0, 0));
 		}
 	}
 	print_menu();

@@ -11,7 +11,7 @@
 #define ICONPATH "Utils/icon.png"
 #define BACKGROUNDPATH "Utils/background.jpg"
 #define MUSICPATH "Music/Antman.wav"
-#define TUTOPATH "Utils/tutorial.png"
+#define TUTOPATH "Utils/tuto.jpg"
 #define FONTPATH "Utils/Triforce.ttf"
 
 #define FPS (50.0)
